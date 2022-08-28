@@ -6,4 +6,4 @@ def multiple_returns(sentence):
         new_tuple = [a, word]
         return new_tuple
     else:
-        return(a,None)
+        return(a, None)
