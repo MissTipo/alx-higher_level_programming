@@ -1,83 +1,99 @@
-#include <Python.h>
-/*
- * macro that replicates the functionality of pythonlist_size
- */
-#define custom_py_size(op) (((PyVarObject *)(op))->ob_size)
-/**
-  * print_python_float - Prints information about python byte objects
-  * @p: PyObject pointer to print info about
-  */
-void print_python_float(PyObject *p)
+#include "/usr/include/python3.4/Python.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+void print_hexn(const char *str, int n);
+void print_python_float(PyObject *p);
+void print_python_bytes(PyObject *p);
+void print_python_list(PyObject *p);
+
+void print_hexn(const char *str, int n)
 {
-	printf("[.] float object info\n");
-	if (!PyFloat_Check(p))
-	{
-		printf("  [ERROR] Invalid Float Object\n");
-		return;
-	}
-	printf("  value: %g\n", ((PyFloatObject *)(p))->ob_fval);
+	int i = 0;
+
+	for (; i < n - 1; ++i)
+		printf("%02x ", (unsigned char) str[i]);
+
+	printf("%02x", str[i]);
+    fflush(stdout);
 }
-/**
-  * print_python_bytes - Prints information about python byte objects
-  * @p: PyObject pointer to print info about
-  */
+
 void print_python_bytes(PyObject *p)
 {
-	int size, i;
-	char *str;
+    PyBytesObject *clone = (PyBytesObject *) p;
+	int calc_bytes, clone_size = 0;
 
-	printf("[.] bytes object info\n");
-	if (!PyBytes_Check(p))
-	{
-		printf("  [ERROR] Invalid Bytes Object\n");
-		return;
-	}
-	size = (assert(PyBytes_Check(p)), custom_py_size(p));
-	str = (assert(PyBytes_Check(p)), (((PyBytesObject *)(p))->ob_sval));
-	printf("  size: %d\n", size);
-	printf("  trying string: %s\n", str);
-	printf("  first %d bytes: ", size < 10 ? size : 10);
-	for (i = 0; i < 10 && i < size + 1; i++)
-	{
-		printf("%02x ", (unsigned char)str[i]);
-	}
-	putchar('\n');
+    printf("[.] bytes object info\n");
+    if (!PyBytes_Check(p))
+    {
+        printf("  [ERROR] Invalid Bytes Object\n");
+        return;
+    }
+
+    clone_size = PyBytes_Size(p);
+    calc_bytes = clone_size + 1;
+
+    if (calc_bytes >= 10)
+        calc_bytes = 10;
+
+    printf("  size: %d\n", clone_size);
+    printf("  trying string: %s\n", clone->ob_sval);
+    printf("  first %d bytes: ", calc_bytes);
+    print_hexn(clone->ob_sval, calc_bytes);
+    printf("\n");
+
+    fflush(stdout);
 }
-/**
-  * print_python_list - Prints information about python objects
-  * @p: PyObject pointer to print info about
- (* item = __Python_list_Get_Item(p, i);
- (* Compile with:
- (* gcc -Wall -Werror -Wextra -pedantic -std=c99 -shared
- (* -Wl,-soname,libPython.so -o libPython.so -fPIC
- (* -I/usr/include/python3.4 103-python.c
-  */
+
 void print_python_list(PyObject *p)
-{
-	Py_ssize_t i, py_list_size;
+{   
+    int i = 0, list_len = 0;
 	PyObject *item;
-	const char *item_type;
-	PyListObject *list_object_cast;
+	PyListObject *clone = (PyListObject *) p;
 
-	printf("[*] Python list info\n");
-	if (!PyList_Check(p))
-	{
-		printf("  [ERROR] Invalid List Object\n");
-		return;
-	}
-	list_object_cast = (PyListObject *)p;
-	py_list_size = custom_py_size(p);
+    printf("[*] Python list info\n");
+    if (!PyList_Check(p))
+    {
+        printf("  [ERROR] Invalid List Object\n");
+        return;
+    }
 
-	printf("[*] Size of the Python List = %d\n", (int) py_list_size);
-	printf("[*] Allocated = %d\n", (int)list_object_cast->allocated);
-	for (i = 0; i < py_list_size; i++)
+	list_len = PyList_GET_SIZE(p);
+	printf("[*] Size of the Python List = %d\n", list_len);
+	printf("[*] Allocated = %d\n", (int) clone->allocated);
+
+	for (; i < list_len; ++i)
 	{
-		item = ((PyListObject *)p)->ob_item[i];
-		item_type = (((PyObject *)(item))->ob_type)->tp_name;
-		printf("Element %d: %s\n", (int) i, item_type);
-		if (strncmp(item_type, "bytes", 5) == 0)
+		item = PyList_GET_ITEM(p, i);
+		printf("Element %d: %s\n", i, item->ob_type->tp_name);
+
+		if (PyBytes_Check(item))
 			print_python_bytes(item);
-		else if (strncmp(item_type, "float", 5) == 0)
-			print_python_float(item);
+        else if (PyFloat_Check(item))
+            print_python_float(item);
 	}
+
+    fflush(stdout);
+}
+
+void print_python_float(PyObject *p)
+{
+    PyFloatObject *clone = (PyFloatObject *) p;
+    float n = 0;
+
+    printf("[.] float object info\n");
+    if (!PyFloat_Check(p))
+    {
+        printf("  [ERROR] Invalid Float Object\n");
+        return;
+    }
+
+    n = clone->ob_fval;
+
+    if ((int) n == n)
+        printf("  value: %0.1f\n", clone->ob_fval);
+    else
+        printf("  value: %0.16g\n", clone->ob_fval);
+
+    fflush(stdout);
 }
