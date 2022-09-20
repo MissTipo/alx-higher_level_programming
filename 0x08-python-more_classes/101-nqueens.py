@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class QueenChessBoard:
     def __init__(self, size):
         # board has dimensions size x size
