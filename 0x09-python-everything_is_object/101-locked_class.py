@@ -3,6 +3,7 @@
 """Defines a locked class."""
 
 class LockedClass(object):
+
     """
     Prevent the user from instantiating new LockedClass attributes
     for anything but attributes called 'first_name'
