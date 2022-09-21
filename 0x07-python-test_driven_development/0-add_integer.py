@@ -1,9 +1,10 @@
 #!/usr/bin/python3
+
 """
 This is a module to add two numbers
 
 This module performs addition operation between two integers,
-or two floats and raises an exception if the number is not an 
+or two floats and raises an exception if the number is not an
 integer or a float.
 
 """
@@ -30,7 +31,9 @@ def add_integer(a, b=98):
     b = convert_to_int(b)
     return a + b
 
+
 def convert_to_int(num):
+
     """Casts the data type of the num parameter
 
     Converts a float number to an integer
@@ -42,6 +45,7 @@ def convert_to_int(num):
         int: The number casted to integer
 
     """
+
     if type(num) is float:
         num = int(num)
         return num
