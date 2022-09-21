@@ -2,7 +2,7 @@
 """A module that divides all elements of a matrix
 
 This module contains matrix_divided function,
-that divides all elements of a matrix according 
+that divides all elements of a matrix according
 to a divisor given. for the program to work, the
 following conditions must be accounted for:
 
