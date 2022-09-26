@@ -7,4 +7,5 @@ from, the specified class ; otherwise False
 
 
 def is_kind_of_class(obj, a_class):
+    """returns true if obj is instance of base or derived class"""
     return isinstance(obj, a_class)
