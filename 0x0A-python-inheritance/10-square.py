@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Contains a derived class Square that inherits
-from the base class Rectangle
+from the class Rectangle
 """
 
 
@@ -15,7 +15,3 @@ class Square(Rectangle):
         self.integer_validator("size", size)
         self.__size = size
         super().__init__(size, size)
-
-    def area(self):
-        """returns the area of class square"""
-        return self.__size ** 2
