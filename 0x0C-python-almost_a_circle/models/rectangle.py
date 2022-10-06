@@ -4,14 +4,14 @@
 
 class Rectangle(Base):
 
-    """a derived class that inerits from Base"""
+    """a derived class that inherits from Base"""
 
     def __init__(self, width, height, x=0, y=0, id=None):
 
         """Instance method"""
 
         self.width = width
-        self._height = height
+        self.height = height
         self.x = x
         self.y = y
         super().__(id)
