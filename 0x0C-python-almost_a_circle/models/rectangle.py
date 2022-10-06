@@ -10,8 +10,48 @@ class Rectangle(Base):
 
         """Instance method"""
 
-        self.__width = width
-        self.__height = height
-        self.__x = x
-        self.__y = y
+        self.width = width
+        self._height = height
+        self.x = x
+        self.y = y
         super().__(id)
+
+    @property
+    def width(self):
+        """Width getter"""
+        return self.__width
+
+    @width.setter
+    def width(self, parameter):
+        """width setter"""
+        self.__width = parameter
+
+    @property
+    def height(self):
+        """height getter"""
+        return self.__height
+
+    @height.setter
+    def height(self, parameter):
+        """height setter"""
+        self.__height = parameter
+
+    @property
+    def x(self):
+        """x getter"""
+        return self.__x
+
+    @x.setter
+    def x(self, parameter):
+        """x setter"""
+        self.__x = parameter
+
+    @property
+    def y(self):
+        """y getter"""
+        return self.__y
+
+    @y.setter
+    def y(self, parameter):
+        """y setter"""
+        self.__y = parameter
