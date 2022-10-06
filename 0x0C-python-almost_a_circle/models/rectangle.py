@@ -8,13 +8,13 @@ class Rectangle(Base):
 
     def __init__(self, width, height, x=0, y=0, id=None):
 
-        """Instance method"""
+        """Instantiates the class Rectangle"""
 
-        self.__width = width
-        self.__height = height
-        self.__x = x
-        self.__y = y
-        super().__(id)
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
+        super().__init__(id)
 
     @property
     def width(self):
