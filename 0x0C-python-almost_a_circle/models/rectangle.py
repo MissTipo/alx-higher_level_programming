@@ -2,6 +2,10 @@
 """This module containes a derived class"""
 
 
+from models.base import Base
+
+
+
 class Rectangle(Base):
 
     """a derived class that inherits from Base"""
