@@ -1,19 +1,17 @@
 #!/usr/bin/python3
-"""This module containes a derived class"""
+"""
+Contains a derived class Rectangle
+"""
 
 
 from models.base import Base
 
 
-
 class Rectangle(Base):
-
-    """a derived class that inherits from Base"""
+    """A derived class that inherits from class Base"""
 
     def __init__(self, width, height, x=0, y=0, id=None):
-
-        """Instantiates the attributes of class Rectangle"""
-
+        """test"""
         self.width = width
         self.height = height
         self.x = x
@@ -22,7 +20,7 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        """Width getter"""
+        """width getter"""
         return self.__width
 
     @width.setter
@@ -41,10 +39,10 @@ class Rectangle(Base):
 
     @height.setter
     def height(self, value):
-        """height setter"""
+        """setter setter"""
         if type(value) is not int:
             raise TypeError("height must be an integer")
-        if height <= 0:
+        if value <= 0:
             raise ValueError("height must be > 0")
         self.__height = value
 
@@ -56,8 +54,10 @@ class Rectangle(Base):
     @x.setter
     def x(self, value):
         """x setter"""
+        if type(value) is not int:
+            raise TypeError("x must be an integer")
         if value < 0:
-            raise ValueError(x must be >= 0)
+            raise ValueError("x must be >= 0")
         self.__x = value
 
     @property
@@ -68,6 +68,67 @@ class Rectangle(Base):
     @y.setter
     def y(self, value):
         """y setter"""
+        if type(value) is not int:
+            raise TypeError("y must be an integer")
         if value < 0:
-            raise ValueError(y must be >= 0)
+            raise ValueError("y must be >= 0")
         self.__y = value
+
+    def area(self):
+        """returns the area of the  rectangle"""
+        return self.__width * self.__height
+
+    def display(self):
+        """displays area of the rectangle"""
+        for i in range(self.__y):
+            print("")
+        for i in range(self.__height):
+            for c in range(self.__x):
+                print(" ", end="")
+            for b in range(self.__width):
+                print("#", end="")
+            print()
+
+    def __str__(self):
+        """A string representation of a rectangle"""
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id,
+                                                       self.__x,
+                                                       self.__y,
+                                                       self.__width,
+                                                       self.__height)
+
+    def update(self, *args, **kwargs):
+        """updates multiple attributes"""
+        if len(args):
+            for i, a in enumerate(args):
+                if i == 0:
+                    self.id = a
+                elif i == 1:
+                    self.width = a
+                elif i == 2:
+                    self.height = a
+                elif i == 3:
+                    self.x = a
+                elif i == 4:
+                    self.y = a
+        else:
+            if "id" in kwargs:
+                self.id = kwargs["id"]
+            if "width" in kwargs:
+                self.width = kwargs["width"]
+            if "height" in kwargs:
+                self.height = kwargs["height"]
+            if "x" in kwargs:
+                self.x = kwargs["x"]
+            if "y" in kwargs:
+                self.y = kwargs["y"]
+
+    def to_dictionary(self):
+        """returns a dictionary representation of a square"""
+        dictionary = {}
+        dictionary["x"] = self.x
+        dictionary["width"] = self.width
+        dictionary["id"] = self.id
+        dictionary["height"] = self.height
+        dictionary["y"] = self.y
+        return dictionary
