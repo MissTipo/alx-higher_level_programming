@@ -1,4 +1,4 @@
 #!/usr/bin/node
-let x = process.argv[2];
-let y = process.argv[3];
+const x = process.argv[2];
+const y = process.argv[3];
 console.log(x + ' is ' + y);
