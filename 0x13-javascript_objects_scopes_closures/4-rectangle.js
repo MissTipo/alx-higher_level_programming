@@ -1,8 +1,7 @@
 #!/usr/bin/node
-// A class Rectangle that defines a rectangle
-class Rectangle {
+module.exports = class Rectangle {
   constructor (w, h) {
-    if (w > 0 && h > 0) {
+    if (h > 0 && w > 0) {
       this.width = w;
       this.height = h;
     }
@@ -15,25 +14,13 @@ class Rectangle {
   }
 
   rotate () {
-    const temp = this.height;
+    const tmp = this.width;
     this.width = this.height;
-    this.height = temp;
+    this.height = tmp;
   }
 
   double () {
     this.width *= 2;
     this.height *= 2;
   }
-}
-module.exports = Rectangle;
-/* const r1 = new Rectangle(2, 3);
-console.log('Normal:');
-r1.print();
-
-console.log('Double:');
-r1.double();
-r1.print();
-
-console.log('Rotate:');
-r1.rotate();
-r1.print(); */
+};
