@@ -2,7 +2,7 @@
 // A class Rectangle that defines a rectangle
 class Rectangle {
   constructor (w, h) {
-    if (w < 0 && h < 0) {
+    if (w > 0 && h > 0) {
       this.width = w;
       this.height = h;
     }
@@ -15,9 +15,9 @@ class Rectangle {
   }
 
   rotate () {
-	  const temp = this.height;
-	  this.width = this.height;
-	  this.height = temp;
+    const temp = this.height;
+    this.width = this.height;
+    this.height = temp;
   }
 
   double () {
@@ -26,3 +26,14 @@ class Rectangle {
   }
 }
 module.exports = Rectangle;
+/* const r1 = new Rectangle(2, 3);
+console.log('Normal:');
+r1.print();
+
+console.log('Double:');
+r1.double();
+r1.print();
+
+console.log('Rotate:');
+r1.rotate();
+r1.print(); */
