@@ -14,10 +14,11 @@ if __name__ == '__main__':
         password=sys.argv[2],
         database=sys.argv[3],
         port=3306)
-    #staname = argv[4]
+    # staname = argv[4]
     cur = db.cursor()
     cur.execute(
-        "SELECT * FROM states WHERE name LIKE BINARY '{:s}' ORDER BY id ASC".format(sys.argv[4]))
+        "SELECT * FROM states WHERE name LIKE BINARY '{:s}' ORDER BY id ASC"
+        .format(sys.argv[4]))
     # cur.execute(f"SELECT * FROM states WHERE id = {sys.argv[4]}")
 
     states = cur.fetchall()
