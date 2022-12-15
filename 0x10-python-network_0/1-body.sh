@@ -1,3 +1,3 @@
 #!/bin/bash
-# script that takes url and displays the body of response
-body=$( curl -sL "$1" | grep -i 'HTTP/1.1' |cut -d " " -f2 ); if [ "$body" -eq "200" ]; then curl "$1"; fi
+# script that takes url and displays the body of responseio
+curl -sL "$1"
