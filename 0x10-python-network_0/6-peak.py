@@ -8,6 +8,7 @@
 
 
 def find_peak(list_of_integers):
+    """ A function that returns the peak value"""
     if list_of_integers == []:
         return None
     list_len = len(list_of_integers)
