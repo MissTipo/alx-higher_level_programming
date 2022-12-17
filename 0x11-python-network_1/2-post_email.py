@@ -9,7 +9,7 @@ from sys import argv
 from urllib.parse import urlencode
 
 if __name__ == "__main__":
-    values = urlencode({'email':argv[2]}).encode('ascii')
+    values = urlencode({'email': argv[2]}).encode('ascii')
     req = Request(argv[1], values)
     with urlopen(req) as response:
         print(response.read().decode('utf-8'))
